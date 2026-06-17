@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohandas Gomes | Portfolio Dev & Automação</title>
+    <!-- Font Awesome para Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(22, 30, 49, 0.7);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --primary: #38bdf8;
+            --primary-hover: #0ea5e9;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --accent: #10b981;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Scrollbar customizada */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+
+        /* Header & Nav */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(11, 15, 25, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Container Geral */
+        section {
+            padding: 6rem 2rem 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--primary);
+            border-radius: 2px;
+        }
+
+        /* Hero Section */
+        #hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            padding-top: 8rem;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-info h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 1rem;
+        }
+
+        .hero-info h2 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-info p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.6rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: #0b0f19;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            background: rgba(255,255,255,0.03);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: var(--text-muted);
+            transform: translateY(-2px);
+        }
+
+        /* Avatar com Efeito Glow */
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .avatar-box {
+            width: 320px;
+            height: 320px;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            background: linear-gradient(45deg, var(--primary), #4f46e5);
+            animation: morphing 10s infinite alternate ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 40px rgba(56, 189, 248, 0.2);
+        }
+
+        .avatar-box i {
+            font-size: 7rem;
+            color: #fff;
+        }
+
+        @keyframes morphing {
+            0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+            100% { border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%; }
+        }
+
+        /* Sobre e Estatísticas */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Tecnologias */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .tech-category {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 12px;
+            transition: transform 0.3s;
+        }
+
+        .tech-category:hover {
+            transform: translateY(-5px);
+            border-color: rgba(56, 189, 248, 0.3);
+        }
+
+        .tech-category h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tech-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tech-tag {
+            background: rgba(255,255,255,0.05);
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Projetos */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--primary);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(56, 189, 248, 0.2);
+            background: rgba(22, 30, 49, 0.9);
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .project-icon {
+            font-size: 1.75rem;
+            color: var(--primary);
+        }
+
+        .project-links a {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-left: 0.75rem;
+            transition: color 0.3s;
+        }
+
+        .project-links a:hover {
+            color: var(--primary);
+        }
+
+        .project-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .project-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .project-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-features li {
+            font-size: 0.85rem;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .project-features li i {
+            color: var(--accent);
+            font-size: 0.75rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .project-tech span {
+            font-size: 0.75rem;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--primary);
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        /* Experiência & Educação */
+        .timeline-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .timeline {
+            border-left: 2px solid var(--border-color);
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2.5rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: calc(-1.5rem - 6px);
+            top: 6px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            border: 2px solid var(--bg-color);
+        }
+
+        .time-period {
+            font-size: 0.85rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-item h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-item h4 {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-item ul {
+            list-style: none;
+            padding-left: 0.2rem;
+        }
+
+        .timeline-item ul li {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .timeline-item ul li::before {
+            content: '•';
+            color: var(--primary);
+        }
+
+        /* Contato */
+        #contact {
+            text-align: center;
+            max-width: 700px;
+            padding-bottom: 8rem;
+        }
+
+        .contact-box {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 3rem;
+            border-radius: 20px;
+            margin-top: 2rem;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2.5rem;
+        }
+
+        .contact-item {
+            text-decoration: none;
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            transition: transform 0.3s;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-3px);
+        }
+
+        .contact-item i {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .contact-item span {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        footer {
+            background: #070a12;
+            border-top: 1px solid var(--border-color);
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Responsividade */
+        @media (max-width: 968px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+            .hero-visual {
+                order: -1;
+            }
+            .hero-info p {
+                margin: 0 auto 2.5rem auto;
+            }
+            .hero-buttons {
+                justify-content: center;
+            }
+            .timeline-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .nav-links {
+                display: none; /* Simplificado para focar no conteúdo principal */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <header>
+        <div class="nav-container">
+            <div class="logo">MOHANDAS<span>.DEV</span></div>
+            <ul class="nav-links">
+                <li><a href="#hero">Início</a></li>
+                <li><a href="#about">Sobre</a></li>
+                <li><a href="#technologies">Tecnologias</a></li>
+                <li><a href="#projects">Projetos</a></li>
+                <li><a href="#experience">Trajetória</a></li>
+                <li><a href="#contact">Contato</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="hero-grid">
+            <div class="hero-info">
+                <h1>Mohandas Leandro</h1>
+                <h2>Desenvolvedor Python & Analista de Automação</h2>
+                <p>Transformando processos empresariais complexos em soluções ágeis, integradas e 100% automatizadas através da tecnologia.</p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">Ver Projetos <i class="fa-solid fa-arrow-right"></i></a>
+                    <a href="#contact" class="btn btn-secondary">Entrar em Contato</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="avatar-box">
+                    <i class="fa-solid fa-code"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr style="border: 0; height: 1px; background: var(--border-color);">
+
+    <!-- Seção Sobre Mim e Métricas -->
+    <section id="about">
+        <h2 class="section-title">Sobre Mim</h2>
+        <div class="about-grid">
+            <div>
+                <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 1.5rem;">
+                    Vindo de uma sólida trajetória na <strong>área contábil</strong>, desenvolvi uma forte visão de negócios e alta capacidade analítica para mapear fluxos operacionais. Hoje, utilizo essa bagagem de mercado para codificar soluções que atacam gargalos reais das empresas.
+                </p>
+                <p style="color: var(--text-muted); font-size: 1.1rem;">
+                    Especializado no ecossistema <strong>Python</strong> e ferramentas de raspagem, extração de dados e comunicação corporativa, desenvolvo integrações com ERPs, automações web completas e pipelines eficientes de tratamento de relatórios.
+                </p>
+                
+                <div class="stats-row">
+                    <div class="stat-card">
+                        <h3>+10k</h3>
+                        <p>Linhas de Processos Automatizados</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>100%</h3>
+                        <p>Foco em Eficiência e ROI</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Full</h3>
+                        <p>Stack do Script ao Frontend</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Stack Tecnológica -->
+    <section id="technologies">
+        <h2 class="section-title">Tecnologias & Hard Skills</h2>
+        <div class="tech-grid">
+            <div class="tech-category">
+                <h3><i class="fa-brands fa-python"></i> Core & Automação</h3>
+                <div class="tech-list">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Playwright</span>
+                    <span class="tech-tag">Web Scraping</span>
+                    <span class="tech-tag">Automação de Processos</span>
+                </div>
+            </div>
+            <div class="tech-category">
+                <h3><i class="fa-solid fa-file-excel"></i> Data & Docs</h3>
+                <div class="tech-list">
+                    <span class="tech-tag">PDFPlumber</span>
+                    <span class="tech-tag">OpenPyXL</span>
+                    <span class="tech-tag">XlsxWriter</span>
+                    <span class="tech-tag">Tratamento de Dados</span>
+                </div>
+            </div>
+            <div class="tech-category">
+                <h3><i class="fa-solid fa-server"></i> Backend & DB</h3>
+                <div class="tech-list">
+                    <span class="tech-tag">Node.js</span>
+                    <span class="tech-tag">Express.js</span>
+                    <span class="tech-tag">APIs REST</span>
+                    <span class="tech-tag">MongoDB</span>
+                </div>
+            </div>
+            <div class="tech-category">
+                <h3><i class="fa-solid fa-laptop-code"></i> Frontend & Mobile</h3>
+                <div class="tech-list">
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">React</span>
+                    <span class="tech-tag">React Native</span>
+                    <span class="tech-tag">HTML5 / CSS3</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Projetos Vitrine -->
+    <section id="projects">
+        <h2 class="section-title">Projetos de Destaque</h2>
+        <div class="projects-grid">
+            
+            <!-- Projeto 1 -->
+            <div class="project-card">
+                <div>
+                    <div class="project-header">
+                        <i class="fa-solid fa-robot project-icon"></i>
+                        <div class="project-links">
+                            <a href="https://github.com/Mohandasl23/NEW_ACCOUNTING_ENTRIES" target="_blank"><i class="fa-brands fa-github"></i></a>
+                        </div>
+                    </div>
+                    <h3>NEW_ACCOUNTING_ENTRIES</h3>
+                    <p>Sistema inteligente corporativo focado na leitura automatizada de extratos em formato PDF, filtragem algorítmica de tarifas/rendimentos e injeção padronizada de lançamentos contábeis diretamente via ERP corporativo.</p>
+                    <ul class="project-features">
+                        <li><i class="fa-solid fa-check"></i> Geração dinâmica de relatórios Excel</li>
+                        <li><i class="fa-solid fa-check"></i> Navegação resiliente com Playwright</li>
+                        <li><i class="fa-solid fa-check"></i> Risco de erro operacional reduzido a zero</li>
+                    </ul>
+                </div>
+                <div class="project-tech">
+                    <span>Python</span>
+                    <span>Playwright</span>
+                    <span>PDFPlumber</span>
+                    <span>OpenPyXL</span>
+                </div>
+            </div>
+
+            <!-- Projeto 2 -->
+            <div class="project-card">
+                <div>
+                    <div class="project-header">
+                        <i class="fa-solid fa-file-invoice-dollar project-icon"></i>
+                        <div class="project-links">
+                            <a href="https://github.com/Mohandasl23" target="_blank"><i class="fa-brands fa-github"></i></a>
+                        </div>
+                    </div>
+                    <h3>Automação de Relatórios</h3>
+                    <p>Bot utilitário desenvolvido para executar autenticação segura, navegação por árvores complexas de sistemas legados, aplicação dinâmica de filtros temporais e extração massiva de relatórios gerenciais.</p>
+                    <ul class="project-features">
+                        <li><i class="fa-solid fa-check"></i> Login automatizado com cookies/sessão</li>
+                        <li><i class="fa-solid fa-check"></i> Download assíncrono de arquivos</li>
+                    </ul>
+                </div>
+                <div class="project-tech">
+                    <span>Python</span>
+                    <span>Playwright</span>
+                    <span>Automation</span>
+                </div>
+            </div>
+
+            <!-- Projeto 3 -->
+            <div class="project-card">
+                <div>
+                    <div class="project-header">
+                        <i class="fa-solid fa-gears project-icon"></i>
+                        <div class="project-links">
+                            <a href="https://github.com/Mohandasl23" target="_blank"><i class="fa-brands fa-github"></i></a>
+                        </div>
+                    </div>
+                    <h3>API REST & Hubs Full Stack</h3>
+                    <p>Ecossistema back-end estruturado para o gerenciamento de requisições, cadastros de usuários e controle de acessos. Integra as aplicações mobile publicadas (CONDOMINIO-APP, STARTAPP).</p>
+                    <ul class="project-features">
+                        <li><i class="fa-solid fa-check"></i> Arquitetura escalável em camadas</li>
+                        <li><i class="fa-solid fa-check"></i> Banco de dados NoSQL performático</li>
+                    </ul>
+                </div>
+                <div class="project-tech">
+                    <span>Node.js</span>
+                    <span>Express</span>
+                    <span>MongoDB</span>
+                    <span>React Native</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Experiência e Educação -->
+    <section id="experience">
+        <div class="timeline-container">
+            <div>
+                <h2 class="section-title">Experiência Profissional</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="time-period">Atualidade</div>
+                        <h3>Assistente Contábil & Automação</h3>
+                        <h4>SELL ADMINISTRADORA</h4>
+                        <ul>
+                            <li>Conciliações e análises financeiras com foco em qualidade de dados.</li>
+                            <li>Identificação proativa de gargalos manuais e desenvolvimento de scripts internos de automação.</li>
+                            <li>Mapeamento de processos e melhoria contínua operacional.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h2 class="section-title">Formação Acadêmica</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="time-period">Graduação</div>
+                        <h3>Análise e Desenvolvimento de Sistemas</h3>
+                        <h4>Universidade São Judas Tadeu (USJT)</h4>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="time-period">Especialização Intensiva</div>
+                        <h3>Formação Full Stack</h3>
+                        <h4>DevClub</h4>
+                        <ul>
+                            <li>Foco prático em stacks Javascript modernas e arquiteturas client-server.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Contato Direto -->
+    <section id="contact">
+        <h2 class="section-title" style="display:block; text-align:center; margin-bottom:1rem;">Buscando Otimizar sua Operação?</h2>
+        <p style="color: var(--text-muted);">Estou disponível para oportunidades como Desenvolvedor Python, Analista de Automação ou de Sistemas. Vamos conversar!</p>
+        
+        <div class="contact-box">
+            <p style="font-weight: 500; font-size: 1.1rem; color: #fff;">📍 Guarulhos - SP (Disponibilidade para Home Office / Híbrido)</p>
+            
+            <div class="contact-grid">
+                <a href="mailto:mohandasgomes@yahoo.com.br" class="contact-item">
+                    <i class="fa-solid fa-envelope"></i>
+                    <strong>E-mail</strong>
+                    <span>mohandasgomes@yahoo.com.br</span>
+                </a>
+                <a href="https://linkedin.com/in/mohandas-leandro-gomes-ba639128" target="_blank" class="contact-item">
+                    <i class="fa-brands fa-linkedin"></i>
+                    <strong>LinkedIn</strong>
+                    <span>Conectar Profissionalmente</span>
+                </a>
+                <a href="https://github.com/Mohandasl23" target="_blank" class="contact-item">
+                    <i class="fa-brands fa-github"></i>
+                    <strong>GitHub</strong>
+                    <span>@Mohandasl23</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 Mohandas Leandro de Albuquerque Gomes. Construído com foco em Performance.</p>
+    </footer>
+
+</body>
+</html>
